@@ -1,0 +1,38 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Generate some example data
+np.random.seed(0)
+data = pd.DataFrame({
+    'Variable_1': np.random.normal(0, 1, 1000),
+    'Variable_2': np.random.normal(5, 2, 1000),
+    'Variable_3': np.random.normal(10, 3, 1000)
+})
+
+# 1. Distribution of Variables (Histograms)
+plt.figure(figsize=(10, 6))
+sns.histplot(data['Variable_1'], kde=True, color='blue', label='Variable 1')
+sns.histplot(data['Variable_2'], kde=True, color='green', label='Variable 2')
+sns.histplot(data['Variable_3'], kde=True, color='red', label='Variable 3')
+plt.legend()
+plt.title('Distribution of Variables')
+plt.show()
+
+# 2. Boxplots to Identify Outliers
+plt.figure(figsize=(10, 6))
+sns.boxplot(data=data)
+plt.title('Boxplot of Variables to Identify Outliers')
+plt.show()
+
+# 3. Correlation Matrix and Heatmap
+correlation_matrix = data.corr()
+plt.figure(figsize=(8, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0)
+plt.title('Correlation Matrix Heatmap')
+plt.show()
+
+# 4. Scatterplot matrix to visually check correlations between variables
+sns.pairplot(data)
+plt.show()
